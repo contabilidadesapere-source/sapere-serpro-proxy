@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: sapere-serpro-proxy
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: SERPRO_AMBIENTE
+        value: producao
+      # Os segredos abaixo devem ser preenchidos no painel do Render (não versionar):
+      # SERPRO_CONSUMER_KEY, SERPRO_CONSUMER_SECRET,
+      # SERPRO_CERT_BASE64, SERPRO_CERT_SENHA,
+      # SERPRO_CONTRATANTE_NUMERO, SERPRO_AUTOR_NUMERO,
+      # PROXY_API_KEY, CORS_ORIGINS
